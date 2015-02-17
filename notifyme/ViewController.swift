@@ -62,9 +62,14 @@ class ViewController: UIViewController {
         let newNotificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: categoriesForSettings)
         UIApplication.sharedApplication().registerUserNotificationSettings(newNotificationSettings)
         UIApplication.sharedApplication().applicationIconBadgeNumber = 0
+    
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleSayEnoughNotification", name: "sayEnoughNotification", object: nil)
         
     }
-
+    
+    func handleSayEnoughNotification() {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
